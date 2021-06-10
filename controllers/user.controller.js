@@ -1,24 +1,56 @@
 const { UserModel } = require("../mudule");
 
-exports.login = async (req, res,) => {
-    if (req.session.loggedIn){
-        res.json({message: "logged in"});
-    }
-    var username = request.body.username;
-    var password = request.body.password;
+exports.addUser = async (req, res) => {
+  const user = req.body;
+  try {
+    const userAdd = await UserModel.create(user);
+    res.status(201).json(userAdd);
+  } catch {
+    res.status(500).json({
+      messag: "Internal server error",
+    });
+  }
+};
 
-    if(!username)res.status(401).json({message: 'Please enter username'});
-    else if (!password)res.status(401).json({message: 'Please enter password'});
-    const user = await UserModel.findAll({
-        attributes: ['userName','email'],
+exports.deleteUser = async (req, res) => {
+  const userId = +req.body.id;
+  if (isNaN(userId)) res.status(400).json({ message: "invalid userId" });
+  try {
+    const count = await UserModel.destroy({
+      where: {
+        id: userId,
+      },
+    });
+    if (count != 1)
+      res.status(400).json({
+        message: "User not found",
+      });
+    res.json({ message: "deleted" });
+  } catch {
+    res.status(500).json({
+      messag: "Internal server error",
+    });
+  }
+};
+exports.editUser = async (req, res) => {
+  const user = req.body;
+  const userId = user.id; 
+  console.log(userId)
+  if (isNaN(userId)) res.status(400).json({ message: "invalid userId" });
+  try {
+    const update = await UserModel.update(user,{
         where:{
-            userName : username,
-            password : password
+            id:userId
         }
-    })
-    if (user.lenght  <  0)res.status(401).json({message: "User name or password is incorrect"});
-    req.session.loggedIn = true;
-    req.session.username = username;
-    res.status(201).json(user);
-}
-
+    });
+    if (update != 1)
+      res.status(400).json({
+        message: "There is no such user",
+      });
+      else res.json({message:'updated'})
+  } catch {
+    res.status(500).json({
+      messag: "Internal server error",
+    });
+  }
+};
