@@ -1,5 +1,5 @@
 
-modeule.export = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const Patient = sequelize.define('Patient', {
         patientName :{
             type: DataTypes.STRING

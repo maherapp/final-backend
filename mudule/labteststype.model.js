@@ -1,5 +1,5 @@
 
-modeule.export = (sequelize, DataTypes) => {
+module.exports = (sequelize, DataTypes) => {
     const LabTestsType = sequelize.define('LabTestsType', {
     
     });

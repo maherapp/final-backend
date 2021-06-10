@@ -1,9 +1,9 @@
 
-modeule.export = (sequelize, DataTypes) => {
-    const Result = sequelize.define('Result', {
+module.exports = (sequelize, DataTypes) => {
+    const Test = sequelize.define('test', {
         resultDate:{
             type: DataTypes.STRING
         }
     });
-    return Result;
+    return Test;
 }
