@@ -36,7 +36,7 @@ TestResultModel.belongsTo(LabTestsTypeModel);
 TestModel.hasMany(TestResultModel);
 TestResultModel.belongsTo(TestModel);
 
-
+exports.TestResultModel = TestResultModel;
 exports.TestTypeModel = TestTypeModel;
 exports.LabTestsTypeModel = LabTestsTypeModel;
 exports.PatientModel = PatientModel;

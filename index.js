@@ -5,6 +5,7 @@ const { labRouter } = require("./routes/lab.route");
 const { patientRouter } = require("./routes/patient.route");
 const { testtypeRouter } = require("./routes/testType.route");
 const { userLoginRouter } = require('./routes/session.route');
+const { testRouter } = require("./routes/getPatientTest.route");
 
 
 const app = express();
@@ -20,6 +21,7 @@ app.use('/api/users', Userrouter);
 app.use('/api/labs', labRouter);
 app.use('/api/patients', patientRouter);
 app.use('/api/testtype', testtypeRouter);
+app.use('/api/test', testRouter);
 
 sequelize.sync().then((e) => console.log(e)); 
 

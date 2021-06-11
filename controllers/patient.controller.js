@@ -1,6 +1,26 @@
 
 const { PatientModel } = require("../mudule");
 
+exports.getPatient = async (req, res) => {
+  const patientname = req.body.patientName;
+  const pateintphonenumber = req.body.pateintPhoneNumber;
+  try{
+    const GetPatient = await PatientModel.findOne({
+      where : {
+        patientName: patientname,
+        pateintPhoneNumber : pateintphonenumber
+      }
+    });
+    if(!GetPatient)res.status(400).json({message: 'no such patient'});
+    else res.json(GetPatient);
+  }catch{
+    res.status(500).json({
+      messag: "Internal server error",
+    });
+  }
+}
+
+
 exports.addpatient = async (req, res) => {
   const patient = req.body;
   try {
