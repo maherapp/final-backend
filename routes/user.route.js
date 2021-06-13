@@ -9,10 +9,10 @@ const router = require("express").Router();
 
 router.get("/", findAll)
 
-router.post("/add", addUser);
+router.post("/", addUser);
 
-router.put("/update", editUser);
+router.put("/", editUser);
 
-router.delete("/delete", deleteUser);
+router.delete("/", deleteUser);
 
-exports.Userrouter = router;
+module.exports = router;

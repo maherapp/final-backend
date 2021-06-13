@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const { sequelize } = require("./models");
-const { Userrouter } = require("./routes/user.route");
+const userRouter = require("./routes/user.route");
 const { labRouter } = require("./routes/lab.route");
 const { patientRouter } = require("./routes/patient.route");
 const { testtypeRouter } = require("./routes/test-type.route");
@@ -17,7 +17,7 @@ app.get("/api", (req, res) => {
 });
 app.use("/session", userLoginRouter);
 
-app.use("/api/users", Userrouter);
+app.use("/api/users", userRouter);
 app.use("/api/labs", labRouter);
 app.use("/api/patients", patientRouter);
 app.use("/api/testtype", testtypeRouter);
