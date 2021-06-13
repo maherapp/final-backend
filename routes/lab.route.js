@@ -2,10 +2,10 @@ const { addlab, editlab, deletelab } = require("../controllers/lab.controller");
 
 const router = require("express").Router();
 
-router.post("/add", addlab);
+router.post("/", addlab);
 
-router.put("/update", editlab);
+router.put("/", editlab);
 
-router.delete("/delete", deletelab);
+router.delete("/", deletelab);
 
-exports.labRouter = router;
+module.exports = router;
