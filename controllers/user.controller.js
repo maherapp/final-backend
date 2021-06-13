@@ -1,4 +1,4 @@
-const { UserModel } = require("../mudule");
+const { UserModel } = require("../models");
 
 exports.addUser = async (req, res) => {
   const user = req.body;
@@ -34,20 +34,20 @@ exports.deleteUser = async (req, res) => {
 };
 exports.editUser = async (req, res) => {
   const user = req.body;
-  const userId = user.id; 
-  console.log(userId)
+  const userId = user.id;
+  console.log(userId);
   if (isNaN(userId)) res.status(400).json({ message: "invalid userId" });
   try {
-    const update = await UserModel.update(user,{
-        where:{
-            id:userId
-        }
+    const update = await UserModel.update(user, {
+      where: {
+        id: userId,
+      },
     });
     if (update != 1)
       res.status(400).json({
         message: "There is no such user",
       });
-      else res.json({message:'updated'})
+    else res.json({ message: "updated" });
   } catch {
     res.status(500).json({
       messag: "Internal server error",

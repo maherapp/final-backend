@@ -1,18 +1,18 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const User = require("./users.module");
+const User = require("./users.model");
 const Test = require("./result.model");
 const Patient = require("./patient.model");
-const LabTestsType = require("./labteststype.model");
-const TestType = require("./testType.model");
-const TestResult = require("./test_result.model");
-const Lab = require("./lab.module");
+const LabTestsType = require("./lab-tests-type.model");
+const TestType = require("./test-type.model");
+const TestResult = require("./test-result.model");
+const Lab = require("./lab.model");
 const sequelize = new Sequelize({
   database: process.env.DB_NAME,
   username: process.env.DB_USERNAME,
   password: process.env.DB_PASSWORD,
   host: process.env.DB_HOST,
   dialect: process.env.DB_DIALECT,
-  port: process.env.DB_PORT
+  port: process.env.DB_PORT,
 });
 
 const UserModel = User(sequelize, DataTypes);

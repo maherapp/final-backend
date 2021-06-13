@@ -1,5 +1,4 @@
-
-const { TestTypeModel } = require("../mudule");
+const { TestTypeModel } = require("../models");
 
 exports.addtesttype = async (req, res) => {
   const testtype = req.body;
@@ -15,7 +14,8 @@ exports.addtesttype = async (req, res) => {
 
 exports.deletetesttype = async (req, res) => {
   const testtypeId = +req.body.id;
-  if (isNaN(testtypeId)) res.status(400).json({ message: "invalid testtypeId" });
+  if (isNaN(testtypeId))
+    res.status(400).json({ message: "invalid testtypeId" });
   try {
     const count = await TestTypeModel.destroy({
       where: {
@@ -35,24 +35,24 @@ exports.deletetesttype = async (req, res) => {
 };
 exports.edittesttype = async (req, res) => {
   const testtype = req.body;
-  const testtypeId = testtype.id; 
-  console.log(testtypeId)
-  if (isNaN(testtypeId)) res.status(400).json({ message: "invalid testtypeId" });
+  const testtypeId = testtype.id;
+  console.log(testtypeId);
+  if (isNaN(testtypeId))
+    res.status(400).json({ message: "invalid testtypeId" });
   try {
-    const update = await TestTypeModel.update(testtype,{
-        where:{
-            id:testtypeId
-        }
+    const update = await TestTypeModel.update(testtype, {
+      where: {
+        id: testtypeId,
+      },
     });
     if (update != 1)
       res.status(400).json({
         message: "There is no such testtype",
       });
-      else res.json({message:'updated'})
+    else res.json({ message: "updated" });
   } catch {
     res.status(500).json({
       messag: "Internal server error",
     });
   }
 };
-

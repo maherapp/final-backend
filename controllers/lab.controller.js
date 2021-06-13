@@ -1,5 +1,4 @@
-
-const { LabModel } = require("../mudule");
+const { LabModel } = require("../models");
 
 exports.addlab = async (req, res) => {
   const lab = req.body;
@@ -35,24 +34,23 @@ exports.deletelab = async (req, res) => {
 };
 exports.editlab = async (req, res) => {
   const lab = req.body;
-  const labId = lab.id; 
-  console.log(labId)
+  const labId = lab.id;
+  console.log(labId);
   if (isNaN(labId)) res.status(400).json({ message: "invalid labId" });
   try {
-    const update = await LabModel.update(lab,{
-        where:{
-            id:labId
-        }
+    const update = await LabModel.update(lab, {
+      where: {
+        id: labId,
+      },
     });
     if (update != 1)
       res.status(400).json({
         message: "There is no such lab",
       });
-      else res.json({message:'updated'})
+    else res.json({ message: "updated" });
   } catch {
     res.status(500).json({
       messag: "Internal server error",
     });
   }
 };
-

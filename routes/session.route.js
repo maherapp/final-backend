@@ -1,7 +1,7 @@
-const {userLogin} = require('../controllers/session.controller');
+const { userLogin } = require("../controllers/session.controller");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
-router.get('/userlogin', userLogin);
+router.get("/userlogin", userLogin);
 
-exports.userLoginRouter= router;
+exports.userLoginRouter = router;

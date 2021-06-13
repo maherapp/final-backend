@@ -1,10 +1,10 @@
 require("dotenv").config();
 const express = require("express");
-const { sequelize } = require("./mudule");
+const { sequelize } = require("./models");
 const { Userrouter } = require("./routes/user.route");
 const { labRouter } = require("./routes/lab.route");
 const { patientRouter } = require("./routes/patient.route");
-const { testtypeRouter } = require("./routes/testType.route");
+const { testtypeRouter } = require("./routes/test-type.route");
 const { userLoginRouter } = require("./routes/session.route");
 const { testRouter } = require("./routes/tests.route");
 

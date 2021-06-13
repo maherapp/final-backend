@@ -1,12 +1,15 @@
-const { addpatient, editpatient, deletepatient} = require('../controllers/patient.controller');
+const {
+  addpatient,
+  editpatient,
+  deletepatient,
+} = require("../controllers/patient.controller");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
+router.post("/add", addpatient);
 
-router.post('/add', addpatient);
+router.put("/update", editpatient);
 
-router.put('/update', editpatient);
+router.delete("/delete", deletepatient);
 
-router.delete('/delete', deletepatient);
-
-exports.patientRouter= router;
+exports.patientRouter = router;

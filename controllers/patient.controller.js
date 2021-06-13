@@ -1,25 +1,23 @@
-
-const { PatientModel } = require("../mudule");
+const { PatientModel } = require("../models");
 
 exports.getPatient = async (req, res) => {
   const patientname = req.body.patientName;
   const pateintphonenumber = req.body.pateintPhoneNumber;
-  try{
+  try {
     const GetPatient = await PatientModel.findOne({
-      where : {
+      where: {
         patientName: patientname,
-        pateintPhoneNumber : pateintphonenumber
-      }
+        pateintPhoneNumber: pateintphonenumber,
+      },
     });
-    if(!GetPatient)res.status(400).json({message: 'no such patient'});
+    if (!GetPatient) res.status(400).json({ message: "no such patient" });
     else res.json(GetPatient);
-  }catch{
+  } catch {
     res.status(500).json({
       messag: "Internal server error",
     });
   }
-}
-
+};
 
 exports.addpatient = async (req, res) => {
   const patient = req.body;
@@ -55,24 +53,23 @@ exports.deletepatient = async (req, res) => {
 };
 exports.editpatient = async (req, res) => {
   const patient = req.body;
-  const patientId = patient.id; 
-  console.log(patientId)
+  const patientId = patient.id;
+  console.log(patientId);
   if (isNaN(patientId)) res.status(400).json({ message: "invalid patientId" });
   try {
-    const update = await PatientModel.update(patient,{
-        where:{
-            id:patientId
-        }
+    const update = await PatientModel.update(patient, {
+      where: {
+        id: patientId,
+      },
     });
     if (update != 1)
       res.status(400).json({
         message: "There is no such patient",
       });
-      else res.json({message:'updated'})
+    else res.json({ message: "updated" });
   } catch {
     res.status(500).json({
       messag: "Internal server error",
     });
   }
 };
-

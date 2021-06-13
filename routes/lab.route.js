@@ -1,12 +1,11 @@
-const { addlab, editlab, deletelab} = require('../controllers/lab.controller');
+const { addlab, editlab, deletelab } = require("../controllers/lab.controller");
 
-const router = require('express').Router();
+const router = require("express").Router();
 
+router.post("/add", addlab);
 
-router.post('/add', addlab);
+router.put("/update", editlab);
 
-router.put('/update', editlab);
+router.delete("/delete", deletelab);
 
-router.delete('/delete', deletelab);
-
-exports.labRouter= router;
+exports.labRouter = router;
