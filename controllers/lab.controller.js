@@ -1,4 +1,4 @@
-const { LabModel } = require("../models");
+const { LabModel, UserModel } = require("../models");
 
 exports.addlab = async (req, res) => {
   const lab = req.body;
@@ -59,4 +59,24 @@ exports.editlab = async (req, res) => {
 exports.findAll = async (req, res) => {
   const labs = await LabModel.findAll();
   res.json(labs);
+};
+
+exports.findById = async (req, res) => {
+  const labId = +req.params.id;
+  if (!labId) {
+    return res.status(400).json({
+      errorMessage: "Invalid lab id",
+    });
+  }
+
+  const lab = await LabModel.findByPk(labId, {
+    include: [
+      {
+        model: UserModel,
+        attributes: ["id", "userName"],
+      },
+    ],
+  });
+
+  res.json(lab);
 };

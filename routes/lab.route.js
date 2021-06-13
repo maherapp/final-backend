@@ -3,9 +3,12 @@ const {
   editlab,
   deletelab,
   findAll,
+  findById,
 } = require("../controllers/lab.controller");
 
 const router = require("express").Router();
+
+router.get("/:id", findById);
 
 router.get("/", findAll);
 
