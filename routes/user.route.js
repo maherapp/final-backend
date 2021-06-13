@@ -4,9 +4,12 @@ const {
   deleteUser,
   findAll,
   assignToLab,
+  findById,
 } = require("../controllers/user.controller");
 
 const router = require("express").Router();
+
+router.get("/:id", findById);
 
 router.get("/", findAll);
 

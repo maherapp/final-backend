@@ -90,11 +90,25 @@ exports.assignToLab = async (req, res) => {
       });
     }
 
-    user.setLab(lab)
+    user.setLab(lab);
     await user.save();
     res.end();
   } catch (error) {
     console.log(error);
-    res.status(500).json(error)
+    res.status(500).json(error);
   }
+};
+
+exports.findById = async (req, res) => {
+  const userId = +req.params.id;
+  if (!userId) {
+    return res.status(400).json({
+      errorMessage: "Invalid user id",
+    });
+  }
+
+  const user = await UserModel.findByPk(userId, {
+    include: [{ model: LabModel, attributes: ["id", "labName"] }],
+  });
+  res.json(user);
 };
