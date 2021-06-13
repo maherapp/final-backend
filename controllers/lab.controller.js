@@ -32,6 +32,7 @@ exports.deletelab = async (req, res) => {
     });
   }
 };
+
 exports.editlab = async (req, res) => {
   const lab = req.body;
   const labId = lab.id;
@@ -53,4 +54,9 @@ exports.editlab = async (req, res) => {
       messag: "Internal server error",
     });
   }
+};
+
+exports.findAll = async (req, res) => {
+  const labs = await LabModel.findAll();
+  res.json(labs);
 };

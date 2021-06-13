@@ -1,6 +1,13 @@
-const { addlab, editlab, deletelab } = require("../controllers/lab.controller");
+const {
+  addlab,
+  editlab,
+  deletelab,
+  findAll,
+} = require("../controllers/lab.controller");
 
 const router = require("express").Router();
+
+router.get("/", findAll);
 
 router.post("/", addlab);
 
