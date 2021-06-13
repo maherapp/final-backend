@@ -54,3 +54,8 @@ exports.editUser = async (req, res) => {
     });
   }
 };
+
+exports.findAll = async (req, res) => {
+  const users = await UserModel.findAll();
+  res.json(users);
+}
