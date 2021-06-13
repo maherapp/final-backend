@@ -1,4 +1,4 @@
-const { UserModel } = require("../models");
+const { UserModel, LabModel } = require("../models");
 
 exports.addUser = async (req, res) => {
   const user = req.body;
@@ -58,4 +58,43 @@ exports.editUser = async (req, res) => {
 exports.findAll = async (req, res) => {
   const users = await UserModel.findAll();
   res.json(users);
-}
+};
+
+exports.assignToLab = async (req, res) => {
+  try {
+    const userId = +req.params.userId;
+    if (!userId) {
+      return res.status(400).json({
+        errorMessage: "Invalid user id",
+      });
+    }
+
+    const labId = +req.params.labId;
+    if (!labId) {
+      return res.status(400).json({
+        errorMessage: "Invalid lab id",
+      });
+    }
+
+    const user = await UserModel.findByPk(userId);
+    if (!user) {
+      return res.status(404).json({
+        errorMessage: "User not found",
+      });
+    }
+
+    const lab = await LabModel.findByPk(labId);
+    if (!lab) {
+      return res.status(404).json({
+        errorMessage: "Lab not found",
+      });
+    }
+
+    user.setLab(lab)
+    await user.save();
+    res.end();
+  } catch (error) {
+    console.log(error);
+    res.status(500).json(error)
+  }
+};
