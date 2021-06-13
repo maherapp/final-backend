@@ -1,17 +1,19 @@
-const {Sequelize, DataTypes} = require('sequelize');
-const User = require('./users.module');
-const Test = require('./result.model');
-const Patient = require('./patient.model')
-const LabTestsType = require('./labteststype.model');
-const TestType = require('./testType.model');
-const TestResult = require('./test_result.model');
-const Lab = require('./lab.module');
-const sequelize = new Sequelize('t', 'root', 'root', {
-    host: 'localhost',
-    dialect: 'mysql'
-  });      
-
-
+const { Sequelize, DataTypes } = require("sequelize");
+const User = require("./users.module");
+const Test = require("./result.model");
+const Patient = require("./patient.model");
+const LabTestsType = require("./labteststype.model");
+const TestType = require("./testType.model");
+const TestResult = require("./test_result.model");
+const Lab = require("./lab.module");
+const sequelize = new Sequelize({
+  database: process.env.DB_NAME,
+  username: process.env.DB_USERNAME,
+  password: process.env.DB_PASSWORD,
+  host: process.env.DB_HOST,
+  dialect: process.env.DB_DIALECT,
+  port: process.env.DB_PORT
+});
 
 const UserModel = User(sequelize, DataTypes);
 const LabModel = Lab(sequelize, DataTypes);
@@ -19,12 +21,12 @@ LabModel.hasMany(UserModel);
 UserModel.belongsTo(LabModel);
 
 const PatientModel = Patient(sequelize, DataTypes);
-const TestModel =   Test(sequelize, DataTypes);
+const TestModel = Test(sequelize, DataTypes);
 PatientModel.hasMany(TestModel);
 TestModel.belongsTo(PatientModel);
 
-const TestTypeModel = TestType(sequelize,DataTypes);
-const LabTestsTypeModel = LabTestsType(sequelize,DataTypes);
+const TestTypeModel = TestType(sequelize, DataTypes);
+const LabTestsTypeModel = LabTestsType(sequelize, DataTypes);
 TestTypeModel.hasMany(LabTestsTypeModel);
 LabTestsTypeModel.belongsTo(TestTypeModel);
 LabModel.hasMany(LabTestsTypeModel);
